@@ -1,0 +1,42 @@
+{
+  "name": "@onoffice/sdk",
+  "version": "0.1.0",
+  "description": "Official TypeScript client to communicate with the onOffice API",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onOfficeGmbH/sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/onOfficeGmbH/sdk/issues"
+  },
+  "homepage": "https://github.com/onOfficeGmbH/sdk#readme",
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
+  }
+}
