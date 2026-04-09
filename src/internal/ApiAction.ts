@@ -13,15 +13,14 @@ export class ApiAction {
     identifier: string | null = "",
     timestamp: number | null = null,
   ) {
-    const sortedParameters =
-      Array.isArray(parameters)
-        ? parameters
-        : Object.keys(parameters)
-            .sort()
-            .reduce<Record<string, unknown>>((acc, key) => {
-              acc[key] = parameters[key];
-              return acc;
-            }, {});
+    const sortedParameters = Array.isArray(parameters)
+      ? parameters
+      : Object.keys(parameters)
+          .sort()
+          .reduce<Record<string, unknown>>((acc, key) => {
+            acc[key] = parameters[key];
+            return acc;
+          }, {});
 
     this.actionParameters = {
       actionid,
@@ -38,6 +37,9 @@ export class ApiAction {
   }
 
   getIdentifier(): string {
-    return crypto.createHash("md5").update(serializeValue(this.actionParameters)).digest("hex");
+    return crypto
+      .createHash("md5")
+      .update(serializeValue(this.actionParameters))
+      .digest("hex");
   }
 }

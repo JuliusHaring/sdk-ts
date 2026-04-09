@@ -14,14 +14,26 @@ class MockHttpFetch {
 describe("ApiCall", () => {
   it("returns handle from callByRawData", () => {
     const apiCall = new ApiCall();
-    const result = apiCall.callByRawData("someActionId", "someResourceId", "someIdentifier", "someResourceType", []);
+    const result = apiCall.callByRawData(
+      "someActionId",
+      "someResourceId",
+      "someIdentifier",
+      "someResourceType",
+      [],
+    );
     expect(result).toBeGreaterThanOrEqual(0);
   });
 
   it("sends requests", async () => {
     const apiCall = new ApiCall();
 
-    const id = apiCall.callByRawData("someActionId", "someResourceId", "someIdentifier", "someResourceType", []);
+    const id = apiCall.callByRawData(
+      "someActionId",
+      "someResourceId",
+      "someIdentifier",
+      "someResourceType",
+      [],
+    );
 
     await apiCall.sendRequests(
       "someToken",
@@ -56,7 +68,13 @@ describe("ApiCall", () => {
 
   it("throws on faulty response structure", async () => {
     const apiCall = new ApiCall();
-    apiCall.callByRawData("someActionId", "someResourceId", "someIdentifier", "someResourceType", []);
+    apiCall.callByRawData(
+      "someActionId",
+      "someResourceId",
+      "someIdentifier",
+      "someResourceType",
+      [],
+    );
 
     await expect(
       apiCall.sendRequests(

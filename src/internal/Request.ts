@@ -13,9 +13,14 @@ export class Request {
   }
 
   createRequest(token: string, secret: string): Record<string, unknown> {
-    const actionParameters = { ...this.apiAction.getActionParameters() } as Record<string, unknown>;
+    const actionParameters = {
+      ...this.apiAction.getActionParameters(),
+    } as Record<string, unknown>;
 
-    if (actionParameters.timestamp === null || actionParameters.timestamp === undefined) {
+    if (
+      actionParameters.timestamp === null ||
+      actionParameters.timestamp === undefined
+    ) {
       actionParameters.timestamp = Math.floor(Date.now() / 1000);
     }
 

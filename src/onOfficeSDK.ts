@@ -2,16 +2,25 @@ import type { onOfficeSDKCache } from "./Cache/onOfficeSDKCache.js";
 import { ApiCall } from "./internal/ApiCall.js";
 
 export class onOfficeSDK {
-  static readonly ACTION_ID_READ = "urn:onoffice-de-ns:smart:2.5:smartml:action:read";
-  static readonly ACTION_ID_CREATE = "urn:onoffice-de-ns:smart:2.5:smartml:action:create";
-  static readonly ACTION_ID_MODIFY = "urn:onoffice-de-ns:smart:2.5:smartml:action:modify";
-  static readonly ACTION_ID_GET = "urn:onoffice-de-ns:smart:2.5:smartml:action:get";
-  static readonly ACTION_ID_DO = "urn:onoffice-de-ns:smart:2.5:smartml:action:do";
-  static readonly ACTION_ID_DELETE = "urn:onoffice-de-ns:smart:2.5:smartml:action:delete";
+  static readonly ACTION_ID_READ =
+    "urn:onoffice-de-ns:smart:2.5:smartml:action:read";
+  static readonly ACTION_ID_CREATE =
+    "urn:onoffice-de-ns:smart:2.5:smartml:action:create";
+  static readonly ACTION_ID_MODIFY =
+    "urn:onoffice-de-ns:smart:2.5:smartml:action:modify";
+  static readonly ACTION_ID_GET =
+    "urn:onoffice-de-ns:smart:2.5:smartml:action:get";
+  static readonly ACTION_ID_DO =
+    "urn:onoffice-de-ns:smart:2.5:smartml:action:do";
+  static readonly ACTION_ID_DELETE =
+    "urn:onoffice-de-ns:smart:2.5:smartml:action:delete";
 
-  static readonly RELATION_TYPE_BUYER = "urn:onoffice-de-ns:smart:2.5:relationTypes:estate:address:buyer";
-  static readonly RELATION_TYPE_TENANT = "urn:onoffice-de-ns:smart:2.5:relationTypes:estate:address:renter";
-  static readonly RELATION_TYPE_OWNER = "urn:onoffice-de-ns:smart:2.5:relationTypes:estate:address:owner";
+  static readonly RELATION_TYPE_BUYER =
+    "urn:onoffice-de-ns:smart:2.5:relationTypes:estate:address:buyer";
+  static readonly RELATION_TYPE_TENANT =
+    "urn:onoffice-de-ns:smart:2.5:relationTypes:estate:address:renter";
+  static readonly RELATION_TYPE_OWNER =
+    "urn:onoffice-de-ns:smart:2.5:relationTypes:estate:address:owner";
 
   static readonly MODULE_ADDRESS = "address";
   static readonly MODULE_ESTATE = "estate";
@@ -45,8 +54,18 @@ export class onOfficeSDK {
     this.apiCall.setCurlOptions(curlOptions);
   }
 
-  callGeneric(actionId: string, resourceType: string, parameters: Record<string, unknown> | unknown[]): number {
-    return this.apiCall.callByRawData(actionId, "", "", resourceType, parameters);
+  callGeneric(
+    actionId: string,
+    resourceType: string,
+    parameters: Record<string, unknown> | unknown[],
+  ): number {
+    return this.apiCall.callByRawData(
+      actionId,
+      "",
+      "",
+      resourceType,
+      parameters,
+    );
   }
 
   call(
@@ -56,7 +75,13 @@ export class onOfficeSDK {
     resourceType: string,
     parameters: Record<string, unknown> | unknown[],
   ): number {
-    return this.apiCall.callByRawData(actionId, resourceId, identifier, resourceType, parameters);
+    return this.apiCall.callByRawData(
+      actionId,
+      resourceId,
+      identifier,
+      resourceType,
+      parameters,
+    );
   }
 
   async sendRequests(token: string, secret: string): Promise<void> {

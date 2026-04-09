@@ -20,7 +20,11 @@
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "fl": "npm run format && npm run lint:fix"
   },
   "engines": {
     "node": ">=20"
@@ -35,6 +39,8 @@
   "homepage": "https://github.com/onOfficeGmbH/sdk#readme",
   "devDependencies": {
     "@types/node": "^25.5.2",
+    "eslint": "^10.2.0",
+    "prettier": "^3.8.1",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
     "vitest": "^4.1.4"

@@ -12,7 +12,11 @@ describe("ApiAction", () => {
       },
     };
 
-    const apiAction = new ApiAction("someId", "someResource", parameters as unknown as Record<string, unknown>);
+    const apiAction = new ApiAction(
+      "someId",
+      "someResource",
+      parameters as unknown as Record<string, unknown>,
+    );
 
     expect(apiAction.getActionParameters()).toEqual({
       actionid: "someId",
@@ -39,7 +43,11 @@ describe("ApiAction", () => {
       },
     };
 
-    const apiAction = new ApiAction("someId", "someResource", parameters as unknown as Record<string, unknown>);
+    const apiAction = new ApiAction(
+      "someId",
+      "someResource",
+      parameters as unknown as Record<string, unknown>,
+    );
 
     expect(apiAction.getIdentifier()).toHaveLength(32);
   });

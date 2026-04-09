@@ -21,7 +21,9 @@ describe("onOfficeSDK", () => {
   it("sets default server on creation", () => {
     const apiCall = createApiCallMock();
     new onOfficeSDK(apiCall);
-    expect(apiCall.setServer).toHaveBeenCalledWith("https://api.onoffice.de/api/");
+    expect(apiCall.setServer).toHaveBeenCalledWith(
+      "https://api.onoffice.de/api/",
+    );
   });
 
   it("forwards setApiVersion", () => {
@@ -57,7 +59,10 @@ describe("onOfficeSDK", () => {
     const apiCall = createApiCallMock();
     const sdk = new onOfficeSDK(apiCall);
     await sdk.sendRequests("someToken", "someSecret");
-    expect(apiCall.sendRequests).toHaveBeenCalledWith("someToken", "someSecret");
+    expect(apiCall.sendRequests).toHaveBeenCalledWith(
+      "someToken",
+      "someSecret",
+    );
   });
 
   it("returns response array", () => {

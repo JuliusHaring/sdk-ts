@@ -22,18 +22,32 @@ export class ApiCall {
     resourceType: string,
     parameters: Record<string, unknown> | unknown[] = [],
   ): number {
-    const apiAction = new ApiAction(actionId, resourceType, parameters, resourceId, identifier);
+    const apiAction = new ApiAction(
+      actionId,
+      resourceType,
+      parameters,
+      resourceId,
+      identifier,
+    );
     const request = new Request(apiAction);
     const requestId = request.getRequestId();
     this.requestQueue[requestId] = request;
     return requestId;
   }
 
-  async sendRequests(token: string, secret: string, httpFetch?: HttpFetch): Promise<void> {
+  async sendRequests(
+    token: string,
+    secret: string,
+    httpFetch?: HttpFetch,
+  ): Promise<void> {
     await this.collectOrGatherRequests(token, secret, httpFetch);
   }
 
-  private async collectOrGatherRequests(token: string, secret: string, httpFetch?: HttpFetch): Promise<void> {
+  private async collectOrGatherRequests(
+    token: string,
+    secret: string,
+    httpFetch?: HttpFetch,
+  ): Promise<void> {
     const actionParameters: Record<string, unknown>[] = [];
     const actionParametersOrder: Request[] = [];
 
@@ -52,7 +66,12 @@ export class ApiCall {
       }
     }
 
-    await this.sendHttpRequests(token, actionParameters, actionParametersOrder, httpFetch);
+    await this.sendHttpRequests(
+      token,
+      actionParameters,
+      actionParametersOrder,
+      httpFetch,
+    );
     this.requestQueue = {};
   }
 
@@ -66,7 +85,11 @@ export class ApiCall {
       return;
     }
 
-    const responseHttp = await this.getFromHttp(token, actionParameters, httpFetch);
+    const responseHttp = await this.getFromHttp(
+      token,
+      actionParameters,
+      httpFetch,
+    );
 
     let result: Record<string, any>;
     try {
@@ -81,12 +104,17 @@ export class ApiCall {
 
     const idsForCache: number[] = [];
 
-    for (const [requestNumber, resultHttp] of Object.entries(result.response.results as Record<string, any>)) {
+    for (const [requestNumber, resultHttp] of Object.entries(
+      result.response.results as Record<string, any>,
+    )) {
       const request = actionParametersOrder[Number(requestNumber)];
       const requestId = request.getRequestId();
 
       if (resultHttp?.status?.errorcode === 0) {
-        this.responses[requestId] = new Response(request, resultHttp as Record<string, unknown>);
+        this.responses[requestId] = new Response(
+          request,
+          resultHttp as Record<string, unknown>,
+        );
         idsForCache.push(requestId);
       } else {
         this.errors[requestId] = resultHttp as Record<string, unknown>;
@@ -108,7 +136,10 @@ export class ApiCall {
     for (const response of responseObjects) {
       if (response.isCacheable()) {
         const responseData = response.getResponseData();
-        const requestParameters = response.getRequest().getApiAction().getActionParameters();
+        const requestParameters = response
+          .getRequest()
+          .getApiAction()
+          .getActionParameters();
         this.writeCache(
           JSON.stringify(responseData),
           requestParameters as unknown as Record<string, unknown>,
@@ -117,7 +148,9 @@ export class ApiCall {
     }
   }
 
-  private getFromCache(parameters: Record<string, unknown>): Record<string, unknown> | null {
+  private getFromCache(
+    parameters: Record<string, unknown>,
+  ): Record<string, unknown> | null {
     for (const cache of this.caches) {
       const resultCache = cache.getHttpResponseByParameterArray(parameters);
       if (resultCache !== null) {
@@ -132,7 +165,10 @@ export class ApiCall {
     return null;
   }
 
-  private writeCache(result: string, actionParameters: Record<string, unknown>): void {
+  private writeCache(
+    result: string,
+    actionParameters: Record<string, unknown>,
+  ): void {
     for (const cache of this.caches) {
       cache.write(actionParameters, result);
     }
@@ -155,7 +191,10 @@ export class ApiCall {
     const instance =
       httpFetch ??
       (() => {
-        const created = new HttpFetch(this.getApiUrl(), JSON.stringify(request));
+        const created = new HttpFetch(
+          this.getApiUrl(),
+          JSON.stringify(request),
+        );
         created.setCurlOptions(this.curlOptions);
         return created;
       })();

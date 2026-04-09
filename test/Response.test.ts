@@ -5,7 +5,15 @@ import { Request } from "../src/internal/Request.js";
 import { Response } from "../src/internal/Response.js";
 
 describe("Response", () => {
-  const request = new Request(new ApiAction("someActionId", "someResourceType", {}, "someResourceId", "someIdentifier"));
+  const request = new Request(
+    new ApiAction(
+      "someActionId",
+      "someResourceType",
+      {},
+      "someResourceId",
+      "someIdentifier",
+    ),
+  );
 
   it("is valid with required fields", () => {
     const response = new Response(request, {

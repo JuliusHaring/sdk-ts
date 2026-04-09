@@ -25,7 +25,9 @@ function serializeArray(value: unknown[] | Record<string, unknown>): string {
     ? value.map((v, i) => [i, v])
     : Object.entries(value).map(([k, v]) => {
         const asNum = Number(k);
-        return Number.isInteger(asNum) && String(asNum) === k ? [asNum, v] : [k, v];
+        return Number.isInteger(asNum) && String(asNum) === k
+          ? [asNum, v]
+          : [k, v];
       });
 
   const payload = items

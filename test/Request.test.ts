@@ -5,7 +5,13 @@ import { Request } from "../src/internal/Request.js";
 
 describe("Request", () => {
   it("returns api action", () => {
-    const apiAction = new ApiAction("someActionId", "someResourceType", {}, "someResourceId", "someIdentifier");
+    const apiAction = new ApiAction(
+      "someActionId",
+      "someResourceType",
+      {},
+      "someResourceId",
+      "someIdentifier",
+    );
     const request = new Request(apiAction);
 
     expect(request.getApiAction()).toBe(apiAction);
@@ -31,7 +37,9 @@ describe("Request", () => {
     expect(result.resourceid).toBe("someResourceId");
     expect(result.identifier).toBe("someIdentifier");
     expect(result.parameters).toEqual({});
-    expect(result.actionid).toBe("urn:onoffice-de-ns:smart:2.5:smartml:action:get");
+    expect(result.actionid).toBe(
+      "urn:onoffice-de-ns:smart:2.5:smartml:action:get",
+    );
     expect(result.resourcetype).toBe("estateCategories");
     expect(result.hmac_version).toBeGreaterThanOrEqual(2);
     expect(result.hmac).toBe("dsvg3r4AFcQXges0MZ+3auzQVfnEB39pLkKSgmm9Wvg=");
@@ -57,7 +65,9 @@ describe("Request", () => {
   });
 
   it("has incrementing request id", () => {
-    const request = new Request(new ApiAction("someActionId", "someResourceType", {}));
+    const request = new Request(
+      new ApiAction("someActionId", "someResourceType", {}),
+    );
     expect(request.getRequestId()).toBeGreaterThanOrEqual(0);
   });
 });
