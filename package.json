@@ -1,7 +1,7 @@
 {
   "name": "@onoffice/sdk",
   "version": "0.1.0",
-  "description": "Official TypeScript client to communicate with the onOffice API",
+  "description": "TypeScript client to communicate with the onOffice API",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

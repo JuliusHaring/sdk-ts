@@ -1,6 +1,6 @@
 # onOffice SDK (TypeScript)
 
-Official TypeScript client to communicate with the [onOffice API](https://apidoc.onoffice.de/).
+TypeScript client to communicate with the [onOffice API](https://apidoc.onoffice.de/).
 
 ## Project status
 
